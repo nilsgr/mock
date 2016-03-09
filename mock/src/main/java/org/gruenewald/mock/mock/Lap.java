@@ -2,25 +2,15 @@ package org.gruenewald.mock.mock;
 
 public class Lap {
 	
-	private int id;
 	private int barCode;
-	private int time;
+	private long time;
 	
 	public Lap() {
 	}
 	
-	Lap(int id, int barCode, int time) {
-		this.id = id;
+	Lap(int barCode, long time) {
 		this.barCode = barCode;
 		this.time = time;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getBarCode() {
@@ -31,13 +21,11 @@ public class Lap {
 		this.barCode = barCode;
 	}
 
-	public int getTime() {
+	public long getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
-
-	
 }
