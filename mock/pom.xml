@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.gruenewald.mock</groupId>
-    <artifactId>mock_dev</artifactId>
+    <artifactId>mock</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mock_dev</name>
+    <name>mock</name>
 
     <build>
-        <finalName>mock_dev</finalName>
+        <finalName>mock</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
