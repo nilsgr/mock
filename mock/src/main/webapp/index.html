@@ -16,7 +16,7 @@
 				$("#startRace").click(
 						function() {
 							$.ajax({
-								url : "webapi/startRace/" + $("#cars").val()
+								url : "webapi/startRace/" + $("#password").val() + "/" + $("#cars").val()
 										+ "/" + $("#rounds").val(),
 								success : function(result) {
 									btnRefresh();
@@ -101,6 +101,8 @@
 		laps waiting in cache to be fetched...<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...please wait until it's cleared
 	</p>
+	Password: 
+	<input id="password" type="password" />
 	Cars:
 	<input id="cars" value="3" /> Rounds:
 	<input id="rounds" value="2" />

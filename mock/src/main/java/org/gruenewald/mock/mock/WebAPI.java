@@ -24,9 +24,11 @@ public class WebAPI {
 	 * starts the race with ajustable cars and ajustable totalRounds
 	 */
 	@GET
-    @Path("/startRace/{cars}/{rounds}")
-    public void startRace(@PathParam("cars") int cars, @PathParam("rounds") int rounds) {
-    	lapService.startRace(cars, rounds);
+    @Path("/startRace/{password}/{cars}/{rounds}")
+    public void startRace(@PathParam("password") String password, @PathParam("cars") int cars, @PathParam("rounds") int rounds) {
+		if(password.equals("mms")) {
+			lapService.startRace(cars, rounds);
+		}
     }
 	
 	/**
