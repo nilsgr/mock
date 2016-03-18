@@ -7,7 +7,7 @@
 	$(document).ready(
 			function() {
 
-				var raceRunning = false;
+				var raceRunning;
 
 				setInterval(function() {
 					btnRefresh();
@@ -46,7 +46,7 @@
 					$.ajax({
 						url : "webapi/checkRaceRunning",
 						success : function(result) {
-							if (result == true) {
+							if (result == "true") {
 								raceRunning = true;
 							} else {
 								raceRunning = false;
@@ -63,7 +63,7 @@
 					$.ajax({
 						url : "webapi/checkNewLaps",
 						success : function(result) {
-							if (result == true) {
+							if (result == "true") {
 								raceCache = true;
 								$("#warningCache").css("display", "block");
 							} else {
@@ -77,7 +77,7 @@
 				}
 
 				function setStyles() {
-					if (raceRunning) {
+					if (raceRunning == true) {
 						$(".raceStarted").css("display", "block");
 						$(".raceStopped").css("display", "none");
 					} else {
@@ -121,7 +121,7 @@
 	<br />
 	<br />---------------------------
 	<p>
-		Impressum:<br />Diese Seite dient lediglich <strong>privater Zwecke</strong> und ist daher von der Impressumspflicht befreit. 
+		Impressum:<br />Diese Seite dient lediglich <strong><u>privater Zwecke</u></strong> und ist daher von der Impressumspflicht befreit. 
 	</p>
 </body>
 
