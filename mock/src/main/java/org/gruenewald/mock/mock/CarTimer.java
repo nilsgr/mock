@@ -8,10 +8,12 @@ public class CarTimer extends TimerTask {
 	private Lap lap;
 	private int barCode;
 	private long newTime;
+	private int round;
 	
-	public CarTimer(LapService lapService, int barCode, long oldTime, long addedTime) {
+	public CarTimer(LapService lapService, int barCode, long oldTime, long addedTime, int round) {
 		this.lapService = lapService;
 		this.barCode = barCode;
+		this.round = round;
 		newTime = oldTime+addedTime;
 		lap = new Lap(barCode, newTime);
 	}
@@ -20,8 +22,6 @@ public class CarTimer extends TimerTask {
 	public void run() {
 		LapService.laps_driven.add(lap);
 		System.out.println(lap.getBarCode() + ": " + lap.getTime());
-		if ( LapService.raceRunning == true ) {
-			lapService.driveLap(barCode, newTime);
-		}
+		lapService.driveLap(barCode, newTime, round+1);
 	}
 }

@@ -10,19 +10,29 @@ public class LapService {
 	static boolean raceRunning = false;
 	static ArrayList<Lap> laps_driven = new ArrayList<Lap>();
 	private Random random;
-	private long time;
+	private int totalRounds;
+	private int cars;
+	private int carsFinishedRace;
 	
 	/**
 	 * starts the race if no one is already running
 	 */
-	public void startRace(int amountOfCars) {
-		time = new Date().getTime();
-		if (!raceRunning) {
+	public void startRace(int amountOfCars, int totalRounds) {
+		this.totalRounds = totalRounds;
+		this.cars = amountOfCars;
+		long startTime = new Date().getTime();
+		carsFinishedRace = 0;
+		
+		if (!raceRunning && laps_driven.size() == 0) {
 			random = new Random();
 			raceRunning = true;
 			
-			for (int i=0; i<amountOfCars; i++) {
-				driveLap(random.nextInt(1000000), time);
+			for (int i=0; i<cars; i++) {
+				int barCode = random.nextInt(1000000);
+				Lap lapZero = new Lap(barCode, startTime);
+				laps_driven.add(lapZero);
+				System.out.println(lapZero.getBarCode() + ": " + lapZero.getTime());
+				driveLap(barCode, startTime, 1);
 			}
 		}
 	}
@@ -49,7 +59,6 @@ public class LapService {
 		} else {
 			return false;
 		}
-		
 	}
 	
 	/**
@@ -87,9 +96,26 @@ public class LapService {
 	 * 
 	 * @param int barCode
 	 */
-	public void driveLap(int barCode, long time) {
+	public void driveLap(int barCode, long time, int drivenRoundNumber) {
 		int addedTime = (random.nextInt(5000)+10000);
 		Timer timer = new Timer();
-		timer.schedule(new CarTimer(this, barCode, time, addedTime), addedTime);
+		if (drivenRoundNumber <= totalRounds) {
+			if (LapService.raceRunning == true) {
+				timer.schedule(new CarTimer(this, barCode, time, addedTime, drivenRoundNumber), addedTime);
+			}
+		} else {
+			carsFinishedRace++;
+			if (carsFinishedRace == cars) {
+				raceRunning = false;
+				System.out.println("Race finished");
+			}
+		}
+	}
+
+	/**
+	 * deleats laps from cache
+	 */
+	public void clearCache() {
+		laps_driven.clear();
 	}
 }

@@ -2,21 +2,31 @@ package org.gruenewald.mock.mock;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("")
-public class Main {
-
+@Path("/")
+public class WebAPI {
+	
 	private LapService lapService = new LapService();
 	
 	/**
-	 * starts the race with 3 cars
+	 * starts the race with 3 cars and 4 totalRounds
 	 */
 	@GET
-    @Path("startRace")
-    public void startRace() {
-    	lapService.startRace(3);
+    @Path("/startRace")
+    public void startPreDefRace() {
+    	lapService.startRace(3, 4);
+    }
+	
+	/**
+	 * starts the race with ajustable cars and ajustable totalRounds
+	 */
+	@GET
+    @Path("/startRace/{cars}/{rounds}")
+    public void startRace(@PathParam("cars") int cars, @PathParam("rounds") int rounds) {
+    	lapService.startRace(cars, rounds);
     }
 	
 	/**
@@ -26,7 +36,7 @@ public class Main {
 	 * 								false = race is NOT running
 	 */
 	@GET
-	@Path("checkRaceRunning")
+	@Path("/checkRaceRunning")
 	public Boolean checkRaceRunning() {
 		return lapService.checkRaceRunning();
 	}
@@ -38,8 +48,7 @@ public class Main {
 	 * 					false = no laps in cache
 	 */
     @GET
-    @Path("checkNewLaps")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/checkNewLaps")
     public Boolean checkNewLaps() {
         return lapService.checkNewLaps();
     }
@@ -50,7 +59,7 @@ public class Main {
      * @return int, quantity of laps
      */
     @GET
-    @Path("quantityOfLaps")
+    @Path("/quantityOfLaps")
     public int quantityOfLaps() {
 		return lapService.quantityOfLaps();
     }
@@ -61,7 +70,7 @@ public class Main {
      * @return lap, last lap
      */
     @GET
-    @Path("getLastLap")
+    @Path("/getLastLap")
     @Produces(MediaType.APPLICATION_JSON)
     public Lap getLastLap() {
     	return lapService.getLastLap();
@@ -71,8 +80,17 @@ public class Main {
      * stops current race
      */
     @GET
-    @Path("stopRace")
+    @Path("/stopRace")
     public void stopRace() {
     	lapService.stopRace();
+    }
+    
+    /**
+     * deleats laps from cache
+     */
+    @GET
+    @Path("/clearCache")
+    public void clearCache() {
+    	lapService.clearCache();
     }
 }
