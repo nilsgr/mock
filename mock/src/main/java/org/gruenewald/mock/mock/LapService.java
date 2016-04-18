@@ -29,7 +29,7 @@ public class LapService {
 			
 			for (int i=0; i<cars; i++) {
 //				int barCode = random.nextInt(1000000);
-				int barCode = 1000+i;
+				int barCode = 1000+1+i;
 				Lap lapZero = new Lap(barCode, startTime);
 				laps_driven.add(lapZero);
 				System.out.println(lapZero.getBarCode() + ": " + lapZero.getTime());
