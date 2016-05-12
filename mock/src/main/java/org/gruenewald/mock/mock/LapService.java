@@ -19,7 +19,7 @@ public class LapService {
 	private int cars;
 	private int carsFinishedRace;
 	
-	static File file = new File("/home/pi/timestamps.txt");
+	static File file = new File("/home/pi/timestamps");
 	static FileReader fileReader;
 	static BufferedReader bufferedReader;
 	static Boolean readerInitialized = false;
@@ -44,7 +44,7 @@ public class LapService {
 				lapsDriven.add(lapZero);
 				totalLapsDriven.add(lapZero);
 				System.out.println(lapZero.getBarCode() + ": " + lapZero.getTime());
-				driveLap(barCode, startTime, 1);
+				//driveLap(barCode, startTime, 1);
 			}
 		}
 	}
