@@ -20,7 +20,8 @@ public class CarTimer extends TimerTask {
 
 	@Override
 	public void run() {
-		LapService.laps_driven.add(lap);
+		LapService.lapsDriven.add(lap);
+		LapService.totalLapsDriven.add(lap);
 		System.out.println(lap.getBarCode() + ": " + lap.getTime());
 		lapService.driveLap(barCode, newTime, round+1);
 	}

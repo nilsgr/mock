@@ -47,8 +47,10 @@
 						url : "webapi/checkRaceRunning",
 						success : function(result) {
 							if (result == "true") {
+								console.log("setted true");
 								raceRunning = true;
 							} else {
+								console.log("setted false");
 								raceRunning = false;
 							}
 						}

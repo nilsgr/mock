@@ -12,16 +12,7 @@ public class WebAPI {
 	private LapService lapService = new LapService();
 	
 	/**
-	 * starts the race with 3 cars and 4 totalRounds
-	 */
-	@GET
-    @Path("/startRace")
-    public void startPreDefRace() {
-    	lapService.startRace(3, 4);
-    }
-	
-	/**
-	 * starts the race with ajustable cars and ajustable totalRounds
+	 * starts the race with adjustable cars and adjustable totalRounds
 	 */
 	@GET
     @Path("/startRace/{password}/{cars}/{rounds}")
@@ -58,7 +49,7 @@ public class WebAPI {
     /**
      * returns the quantity of laps in cache
      * 
-     * @return int, quantity of laps
+     * @return integer, quantity of laps
      */
     @GET
     @Path("/quantityOfLaps")
@@ -79,6 +70,17 @@ public class WebAPI {
     }
     
     /**
+     * returns all driven laps
+     * 
+     * @return all driven laps as JSON
+     */
+    @GET
+    @Path("/getTotalLaps")
+    public String getTotalLaps() {
+		return lapService.getTotalLaps();
+    }
+    
+    /**
      * stops current race
      */
     @GET
@@ -88,7 +90,7 @@ public class WebAPI {
     }
     
     /**
-     * deleats laps from cache
+     * deletes laps from cache
      */
     @GET
     @Path("/clearCache")
